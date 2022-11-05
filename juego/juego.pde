@@ -1,9 +1,7 @@
 float xt = 0;
 float yt = 0;
-PImage img;
-PImage img2;
+PImage img, img2, good, stars;
 boolean flag = true;
-PImage good;
 float x = 0;
 float y = 0;
 int you = rand_int_num(0,1000);
@@ -17,6 +15,7 @@ void setup(){
   img = loadImage("inicio.png");
   img2 = loadImage("personaje1.png");
   good = loadImage("Cartoon-alien.png");
+  stars = loadImage("stars.jpg");
   sumas();
 }
 
@@ -51,6 +50,7 @@ void start1(){
 void grid(){
   stroke(255);
   strokeWeight(2);
+  image(stars,0,0);
   
   xt = 320;
   while (xt < width) {
