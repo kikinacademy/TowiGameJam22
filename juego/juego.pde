@@ -1,3 +1,5 @@
+import gifAnimation.*;
+
 float xt = 0, yt = 0, x = 0, y = 0;
 PImage img, img2, good, stars;
 boolean flag = true;
@@ -5,7 +7,8 @@ int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
 PFont font;
-
+Gif myAnimation;
+Gif myAnimation2;
 void setup(){
   size(960,540);
   font = createFont("Arial",16,true);
@@ -13,12 +16,16 @@ void setup(){
   img2 = loadImage("personaje1.png");
   good = loadImage("Cartoon-alien.png");
   stars = loadImage("stars.jpg");
+  myAnimation = new Gif(this, "malo.gif");
+  myAnimation2 = new Gif(this, "pbueno.gif");
   sumas();
 }
 
 
 void draw(){
   background(0);
+  myAnimation.play();
+  myAnimation2.play();
   start1();
   if(flag==false)
   {
@@ -63,18 +70,18 @@ void grid(){
     line(0,yt,width,yt);
     yt = yt + 180;
   }
-  image(good,0,0,width/3, height/3); // top left
-  image(good,650, 360,width/3, height/3); //buttom right
-  image(good,330, 0,width/3, height/3); //center top
-  image(good,650, 0,width/3, height/3); //top right
-  image(good,650, 180,width/3, height/3); //center right
-  image(good,330, 360,width/3, height/3); //down mid
-  image(good,330,180,width/3, height/3); // center
-  image(good,0,180,width/3, height/3); // center left
+  image(myAnimation,0,0,width/3, height/3); // top left
+  image(myAnimation,650, 360,width/3, height/3); //buttom right
+  image(myAnimation,330, 0,width/3, height/3); //center top
+  image(myAnimation,650, 0,width/3, height/3); //top right
+  image(myAnimation,650, 180,width/3, height/3); //center right
+  image(myAnimation,330, 360,width/3, height/3); //down mid
+  image(myAnimation,330,180,width/3, height/3); // center
+  image(myAnimation,0,180,width/3, height/3); // center left
   
   fill(255);
   // En donde comienza el jugador
-  image(img2,0,360,width/3, height/3); // down left
+  image( myAnimation2,-50,330,width/2, height/2); // down left
   
   textFont(font,28);
   textAlign(CENTER);
