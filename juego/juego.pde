@@ -1,22 +1,21 @@
-float xt = 0;
-float yt = 0;
-PImage img;
-PImage img2;
+float xt = 0, yt = 0, x = 0, y = 0;
+PImage img, img2, good, stars;
 boolean flag = true;
-PImage good;
-float x = 0;
-float y = 0;
-int you = rand_int_num(0,1000);
-int rival;
-int distance = rand_int_num(1,5);
+int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
+int [] rivals = new int[9];
+PFont font;
 
 void setup(){
   size(960,540);
+  font = createFont("Arial",16,true);
   img = loadImage("inicio.png");
   img2 = loadImage("personaje1.png");
   good = loadImage("Cartoon-alien.png");
+  stars = loadImage("stars.jpg");
+  sumas();
 }
+
 
 void draw(){
   background(0);
@@ -25,8 +24,9 @@ void draw(){
   {
     grid();
   }
-  sumas();
 }
+
+
 void start1(){
   if(flag == true)
   {
@@ -44,14 +44,13 @@ void start1(){
     stroke(10);
     text("START", 395, 235); 
   }
-  
-  
 }
 
 
 void grid(){
   stroke(255);
   strokeWeight(2);
+  image(stars,0,0);
   
   xt = 320;
   while (xt < width) {
@@ -72,27 +71,41 @@ void grid(){
   image(good,330, 360,width/3, height/3); //down mid
   image(good,330,180,width/3, height/3); // center
   image(good,0,180,width/3, height/3); // center left
-
+  
+  fill(255);
   // En donde comienza el jugador
-  image(good,0,360,width/3, height/3); // down left
+  image(img2,0,360,width/3, height/3); // down left
+  
+  textFont(font,28);
+  textAlign(CENTER);
+  text(operations[0], 80, 470);
+  text(operations[1], 80, 100);
+  text(operations[2], 80, 300);
+  
+  text(operations[3], 400, 100);
+  text(operations[4], 400, 300);
+  text(operations[5], 400, 470);
+  
+  text(operations[6], 720, 100);
+  text(operations[7], 720, 300);
+  text(operations[8], 720, 470);
 }
-
-
 
 void sumas(){
     rival = you;
     operations[0] = str(you);
+    rivals[0] = you;
     println("YOU: "+ you);
     
     for(int i=1; i < 9; i++)
     {
         if(i%2==0)
         {
-            operations[i] = cicle1();
+            operations[i] = cicle1(i);
         }
         else
         {
-        operations[i] = cicle2();
+            operations[i] = cicle2(i);
         }
     }
     
@@ -101,6 +114,7 @@ void sumas(){
     for(int i=1; i < 9; i++)
     {
         println(operations[i]);
+        println(rivals[i]);
     }
 }
 
@@ -114,11 +128,11 @@ void repeated(){
             {
                 if(i%2==0)
                 {
-                    operations[i] = cicle1();
+                    operations[i] = cicle1(i);
                 }
                 else
                 {
-                    operations[i] = cicle2();
+                    operations[i] = cicle2(i);
                 }
             }
         }
@@ -131,7 +145,7 @@ int rand_int_num(int h, int l) {
     return num;
 }
 
-String divide(int value){
+String divide(int value, int i){
     int x=0;
     int y=0;
     while(x + y != value)
@@ -139,15 +153,16 @@ String divide(int value){
         x = rand_int_num(0,1000);
         y = rand_int_num(0,1000);
     }
+    rivals[i] = x+y;
     return str(x) + " + " + str(y);
 }
 
-String cicle1(){
+String cicle1(int i){
     rival = rand_int_num(you/distance, you-distance);
-    return divide(rival);
+    return divide(rival, i);
 }
 
-String cicle2(){
+String cicle2(int i){
     rival = rand_int_num(you+5*distance, you*distance);
-    return divide(rival);
+    return divide(rival, i);
 }
