@@ -10,12 +10,14 @@ int you = rand_int_num(0,1000);
 int rival;
 int distance = rand_int_num(1,5);
 String [] operations = new String [9];
+int [] rivals = new int[9];
 
 void setup(){
   size(960,540);
   img = loadImage("inicio.png");
   img2 = loadImage("personaje1.png");
   good = loadImage("Cartoon-alien.png");
+  sumas();
 }
 
 void draw(){
@@ -25,7 +27,6 @@ void draw(){
   {
     grid();
   }
-  sumas();
 }
 void start1(){
   if(flag == true)
@@ -44,8 +45,6 @@ void start1(){
     stroke(10);
     text("START", 395, 235); 
   }
-  
-  
 }
 
 
@@ -74,25 +73,24 @@ void grid(){
   image(good,0,180,width/3, height/3); // center left
 
   // En donde comienza el jugador
-  image(good,0,360,width/3, height/3); // down left
+  image(img2,0,360,width/3, height/3); // down left
 }
-
-
 
 void sumas(){
     rival = you;
     operations[0] = str(you);
+    rivals[0] = you;
     println("YOU: "+ you);
     
     for(int i=1; i < 9; i++)
     {
         if(i%2==0)
         {
-            operations[i] = cicle1();
+            operations[i] = cicle1(i);
         }
         else
         {
-        operations[i] = cicle2();
+            operations[i] = cicle2(i);
         }
     }
     
@@ -101,6 +99,7 @@ void sumas(){
     for(int i=1; i < 9; i++)
     {
         println(operations[i]);
+        println(rivals[i]);
     }
 }
 
@@ -114,11 +113,11 @@ void repeated(){
             {
                 if(i%2==0)
                 {
-                    operations[i] = cicle1();
+                    operations[i] = cicle1(i);
                 }
                 else
                 {
-                    operations[i] = cicle2();
+                    operations[i] = cicle2(i);
                 }
             }
         }
@@ -131,7 +130,7 @@ int rand_int_num(int h, int l) {
     return num;
 }
 
-String divide(int value){
+String divide(int value, int i){
     int x=0;
     int y=0;
     while(x + y != value)
@@ -139,15 +138,16 @@ String divide(int value){
         x = rand_int_num(0,1000);
         y = rand_int_num(0,1000);
     }
+    rivals[i] = x+y;
     return str(x) + " + " + str(y);
 }
 
-String cicle1(){
+String cicle1(int i){
     rival = rand_int_num(you/distance, you-distance);
-    return divide(rival);
+    return divide(rival, i);
 }
 
-String cicle2(){
+String cicle2(int i){
     rival = rand_int_num(you+5*distance, you*distance);
-    return divide(rival);
+    return divide(rival, i);
 }
