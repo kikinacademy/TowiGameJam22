@@ -1,12 +1,7 @@
-float xt = 0;
-float yt = 0;
+float xt = 0, yt = 0, x = 0, y = 0;
 PImage img, img2, good, stars;
 boolean flag = true;
-float x = 0;
-float y = 0;
-int you = rand_int_num(0,1000);
-int rival;
-int distance = rand_int_num(1,5);
+int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
 
@@ -19,6 +14,7 @@ void setup(){
   sumas();
 }
 
+
 void draw(){
   background(0);
   start1();
@@ -27,6 +23,8 @@ void draw(){
     grid();
   }
 }
+
+
 void start1(){
   if(flag == true)
   {
