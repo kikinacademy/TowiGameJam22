@@ -1,5 +1,6 @@
 import gifAnimation.*;
 
+
 float xt = 0, yt = 0, x = 0, y = 0;
 PImage img, img2, good, stars;
 boolean flag = true;
@@ -7,8 +8,9 @@ int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
 PFont font;
-Gif malo, start;
-Gif malo2;
+Gif malo, start, bueno;
+
+
 void setup(){
   size(960,540);
   font = createFont("Arial",16,true);
@@ -18,16 +20,16 @@ void setup(){
   stars = loadImage("stars.jpg");
   start = new Gif(this, "pinicio.gif");
   malo = new Gif(this, "malo.gif");
-  malo2 = new Gif(this, "pbueno.gif");
+  bueno = new Gif(this, "pbueno.gif");
   sumas();
 }
 
 
 void draw(){
   background(0);
-  start.play(); // OJO:: QUITAR FONDO
+  start.play(); // TODO -- OJO:: QUITAR FONDO
   malo.play();
-  malo2.play();
+  bueno.play();
   start1();
   if(flag==false)
   {
@@ -83,21 +85,22 @@ void grid(){
   
   fill(255);
   // En donde comienza el jugador
-  image( malo2,-50,330,width/2, height/2); // down left
+  image( bueno,-50,330,width/2, height/2); // down left
   
   textFont(font,28);
   textAlign(CENTER);
+  text(operations[1], 80, 170);
+  text(operations[2], 80, 350);
+  
   text(operations[0], 80, 470);
-  text(operations[1], 80, 100);
-  text(operations[2], 80, 300);
   
-  text(operations[3], 400, 100);
-  text(operations[4], 400, 300);
-  text(operations[5], 400, 470);
+  text(operations[3], 400, 170);
+  text(operations[4], 400, 350);
+  text(operations[5], 400, 530);
   
-  text(operations[6], 720, 100);
-  text(operations[7], 720, 300);
-  text(operations[8], 720, 470);
+  text(operations[6], 720, 170);
+  text(operations[7], 720, 350);
+  text(operations[8], 720, 530);
 }
 
 void sumas(){
