@@ -7,8 +7,8 @@ int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
 PFont font;
-Gif myAnimation;
-Gif myAnimation2;
+Gif malo, start;
+Gif malo2;
 void setup(){
   size(960,540);
   font = createFont("Arial",16,true);
@@ -16,16 +16,18 @@ void setup(){
   img2 = loadImage("personaje1.png");
   good = loadImage("Cartoon-alien.png");
   stars = loadImage("stars.jpg");
-  myAnimation = new Gif(this, "malo.gif");
-  myAnimation2 = new Gif(this, "pbueno.gif");
+  start = new Gif(this, "pinicio.gif");
+  malo = new Gif(this, "malo.gif");
+  malo2 = new Gif(this, "pbueno.gif");
   sumas();
 }
 
 
 void draw(){
   background(0);
-  myAnimation.play();
-  myAnimation2.play();
+  start.play(); // OJO:: QUITAR FONDO
+  malo.play();
+  malo2.play();
   start1();
   if(flag==false)
   {
@@ -38,7 +40,7 @@ void start1(){
   if(flag == true)
   {
     image(img,0,0);
-    image(img2,250,200,width/2, height/2);
+    image(start,250,200,width/2, height/2);
     if (mousePressed && (mouseButton == LEFT)) {
       fill(180);
       flag = false;
@@ -70,18 +72,18 @@ void grid(){
     line(0,yt,width,yt);
     yt = yt + 180;
   }
-  image(myAnimation,0,0,width/3, height/3); // top left
-  image(myAnimation,650, 360,width/3, height/3); //buttom right
-  image(myAnimation,330, 0,width/3, height/3); //center top
-  image(myAnimation,650, 0,width/3, height/3); //top right
-  image(myAnimation,650, 180,width/3, height/3); //center right
-  image(myAnimation,330, 360,width/3, height/3); //down mid
-  image(myAnimation,330,180,width/3, height/3); // center
-  image(myAnimation,0,180,width/3, height/3); // center left
+  image(malo,0,0,width/3, height/3); // top left
+  image(malo,650, 360,width/3, height/3); //buttom right
+  image(malo,330, 0,width/3, height/3); //center top
+  image(malo,650, 0,width/3, height/3); //top right
+  image(malo,650, 180,width/3, height/3); //center right
+  image(malo,330, 360,width/3, height/3); //down mid
+  image(malo,330,180,width/3, height/3); // center
+  image(malo,0,180,width/3, height/3); // center left
   
   fill(255);
   // En donde comienza el jugador
-  image( myAnimation2,-50,330,width/2, height/2); // down left
+  image( malo2,-50,330,width/2, height/2); // down left
   
   textFont(font,28);
   textAlign(CENTER);
