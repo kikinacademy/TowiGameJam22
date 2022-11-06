@@ -23,7 +23,7 @@ void setup(){
   malo = new Gif(this, "malo.gif");
   bueno = new Gif(this, "pbueno.gif");
   sumas();
-  You = new Character(0,360,rivals[0],true,bueno); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
+  You = new Character(-50,330,rivals[0],true,bueno); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
   
   R1 = new Character(0,0,rivals[1],true,malo);
   R2 = new Character(650,360,rivals[2],true,malo);
@@ -58,6 +58,7 @@ void draw(){
   {
     grid(); 
   }
+  identify_mouse_grid_on_click();
 
 }
 
@@ -98,13 +99,11 @@ void grid(){
     line(0,yt,width,yt);
     yt = yt + 180;
   }
-  
-  // delay(500);  // TODO -- OJO:: EL PERSONJE CENTRAL SE BORRA PQ SE QUEDA ATORADO EL MOUSE EN EL CENTRO
 
+  You.display();
   for (int i = 0; i < 9; i++){
     if (characters[i].status==true){
       characters[i].display();
-      characters[i].hide();
     }
   }
   
@@ -268,20 +267,20 @@ class Character {
 
 
   void hide() {
-    int c = identify_mouse_grid_on_click();
-    switch (c) {
+    int chars = identify_mouse_grid_on_click();
+    switch (chars) {
     case 1:
       if (this.x == 0 && this.y == 0) {
         this.status = false;
       }
       break;
     case 2:
-      if (this.x == 330 && this.y == 0) {
+      if (this.x == 320 && this.y == 0) {
         this.status = false;
       }
       break;
     case 3:
-      if (this.x == 650 && this.y == 0) {
+      if (this.x == 640 && this.y == 0) {
         this.status = false;
       }
       break;
@@ -291,12 +290,12 @@ class Character {
       }
       break;
     case 5:
-      if (this.x == 330 && this.y == 180) {
+      if (this.x == 320 && this.y == 180) {
         this.status = false;
       }
       break;
     case 6:
-      if (this.x == 650 && this.y == 180) {
+      if (this.x == 640 && this.y == 180) {
         this.status = false;
       }
       break;
@@ -306,16 +305,15 @@ class Character {
       }
       break;
     case 8:
-      if (this.x == 330 && this.y == 360) {
+      if (this.x == 320 && this.y == 360) {
         this.status = false;
       }
       break;
     case 9:
-      if (this.x == 650 && this.y == 360) {
+      if (this.x == 640 && this.y == 360) {
         this.status = false;
       }
       break;
-
     }
   }
 }
