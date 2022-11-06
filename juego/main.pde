@@ -9,9 +9,10 @@ String [] operations = new String [9];
 int [] rivals = new int[9];
 PFont font;
 Gif malo, start, bueno;
+Operator a1;
 Character You, R1, R2, R3, R4, R5, R6, R7, R8;
 Character [] characters = new Character[9];
-Operation [] additions = new Operation[9];
+Operator [] additions = new Operator[9];
 
 
 void setup(){
@@ -117,39 +118,39 @@ void grid(){
   textAlign(CENTER);
   
   // text(operations[1], 80, 170);
-  additions[2] = Operation(operations[1], 80, 170);
+  additions[2] = new Operator(operations[1], 80, 170);
   additions[2].calculate_expression();
 
   // text(operations[2], 80, 350);
-  additions[1] = Operation(operations[2], 80, 350);
+  additions[1] = new Operator(operations[2], 80, 350);
   additions[1].calculate_expression();
   
   // text(operations[0], 80, 470);
-  additions[0] = Operation(operations[0], 80, 470);
+  additions[0] = new Operator(operations[0], 80, 470);
   additions[0].asign(int(operations[0]));
 
   // text(operations[3], 400, 170);
-  additions[3] = Operation(operations[3], 400, 170);
+  additions[3] = new Operator(operations[3], 400, 170);
   additions[3].calculate_expression();
 
   // text(operations[4], 400, 350);
-  additions[4] = Operation(operations[4], 400, 350);
+  additions[4] = new Operator(operations[4], 400, 350);
   additions[4].calculate_expression();
 
   // text(operations[5], 400, 530);
-  additions[5] = Operation(operations[5], 400, 530);
+  additions[5] = new Operator(operations[5], 400, 530);
   additions[5].calculate_expression();
   
   // text(operations[6], 720, 170);
-  additions[6] = Operation(operations[6], 720, 170);
+  additions[6] = new Operator(operations[6], 720, 170);
   additions[6].calculate_expression();
 
   // text(operations[7], 720, 350);
-  additions[7] = Operation(operations[7], 720, 350);
+  additions[7] = new Operator(operations[7], 720, 350);
   additions[7].calculate_expression();
 
   // text(operations[8], 720, 530);
-  additions[8] = Operation(operations[8], 720, 530);
+  additions[8] = new Operation(operations[8], 720, 530);
   additions[8].calculate_expression();
 }
 
@@ -347,14 +348,15 @@ class Character {
 }
 
 
-class Operation {
+
+class Operator {
   String expression;
   int x;
   int y;
   int result;
   boolean status = true;
 
-  Operation(String expression, int x, int y) {
+  Operator(String expression, int x, int y) {
     this.expression = expression;
     this.x = x;
     this.y = y;
