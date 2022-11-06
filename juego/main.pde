@@ -22,6 +22,16 @@ void setup(){
   malo = new Gif(this, "malo.gif");
   bueno = new Gif(this, "pbueno.gif");
   sumas();
+  You = new Character(-50,330,rivals[0],true,bueno); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
+  
+  R1 = new Character(0,0,rivals[1],true,malo);
+  R2 = new Character(650,360,rivals[2],true,malo);
+  R3 = new Character(330,0,rivals[3],true,malo);
+  R4 = new Character(650,0,rivals[4],true,malo);
+  R5 = new Character(650,180,rivals[5],true,malo);
+  R6 = new Character(330,360,rivals[6],true,malo);
+  R7 = new Character(330,180,rivals[7],true,malo);
+  R8 = new Character(0,180,rivals[8],true,malo);
 }
 
 
@@ -37,29 +47,6 @@ void draw(){
     grid(); 
   }
   identify_mouse_grid_on_click();
-
-
-  // CREATE MAIN CHARACTER WITH CLASS
-  You = new Character(-50,330,rivals[0],true,bueno);
-  // CREATE 8 SECOND CHARACTERS
-  R1 = new Character(0,0,rivals[1],true,malo);
-  R2 = new Character(650,360,rivals[2],true,malo);
-  R3 = new Character(330,0,rivals[3],true,malo);
-  R4 = new Character(650,0,rivals[4],true,malo);
-  R5 = new Character(650,180,rivals[5],true,malo);
-  R6 = new Character(330,360,rivals[6],true,malo);
-  R7 = new Character(330,180,rivals[7],true,malo);
-  R8 = new Character(0,180,rivals[8],true,malo);
-  // DISPLAY NEW CHARACTERS
-  You.display();
-  R1.display();
-  R2.display();
-  R3.display();
-  R4.display();
-  R5.display();
-  R6.display();
-  R7.display();
-  R8.display();
 }
 
 
@@ -99,18 +86,17 @@ void grid(){
     line(0,yt,width,yt);
     yt = yt + 180;
   }
-  // image(malo,0,0,width/3, height/3); // top left
-  // image(malo,650, 360,width/3, height/3); //buttom right
-  // image(malo,330, 0,width/3, height/3); //center top
-  // image(malo,650, 0,width/3, height/3); //top right
-  // image(malo,650, 180,width/3, height/3); //center right
-  // image(malo,330, 360,width/3, height/3); //down mid
-  // image(malo,330,180,width/3, height/3); // center
-  // image(malo,0,180,width/3, height/3); // center left
+  You.display();
+  R1.display();
+  R2.display();
+  R3.display();
+  R4.display();
+  R5.display();
+  R6.display();
+  R7.display();
+  R8.display();
   
   fill(255);
-  // En donde comienza el jugador
-  // image(bueno,-50,330,width/2, height/2); // down left
   
   textFont(font,28);
   textAlign(CENTER);
@@ -236,7 +222,6 @@ void identify_mouse_grid_on_click(){
 }
 
 
-// CREATE A CLASS, CHARACTER THAT CONTAINS CHARACTER POSITION, CHARACTER VALUE, AND STATUS
 class Character {
   int x;
   int y;
@@ -251,23 +236,9 @@ class Character {
     this.status = status;
     this.image = image;
   }
-  
+
   void display() {
-    fill(255);
-    ellipse(x, y, 20, 20);
-  }
-  
-  void move() {
-    if (keyPressed) {
-      if (keyCode == UP) {
-        y -= 5;
-      } else if (keyCode == DOWN) {
-        y += 5;
-      } else if (keyCode == LEFT) {
-        x -= 5;
-      } else if (keyCode == RIGHT) {
-        x += 5;
-      }
-    }
+    image(this.image, this.x, this.y, width/3, height/3);
   }
 }
+
