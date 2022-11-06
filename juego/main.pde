@@ -3,7 +3,7 @@ import gifAnimation.*;
 
 float xt = 0, yt = 0, x = 0, y = 0;
 PImage fondo, fondo2, good, stars;
-boolean flag = true;
+boolean flag = true, centro = true;
 int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
@@ -99,13 +99,17 @@ void grid(){
     yt = yt + 180;
   }
   
-  // delay(500);  // TODO -- OJO:: EL PERSONJE CENTRAL SE BORRA PQ SE QUEDA ATORADO EL MOUSE EN EL CENTRO
+  // TODO -- OJO:: EL PERSONJE CENTRAL SE BORRA PQ SE QUEDA ATORADO EL MOUSE EN EL CENTRO
 
   for (int i = 0; i < 9; i++){
     if (characters[i].status==true){
       characters[i].display();
       characters[i].hide();
     }
+  }
+  
+  if(centro == true){
+    characters[7].display();
   }
   
   fill(255);
@@ -130,7 +134,7 @@ void sumas(){
     rival = you;
     operations[0] = str(you);
     rivals[0] = you;
-    println("YOU: "+ you);
+    // println("YOU: "+ you);
     
     for(int i=1; i < 9; i++)
     {
@@ -146,11 +150,11 @@ void sumas(){
     
     repeated();
     
-    for(int i=1; i < 9; i++)
-    {
-        println(operations[i]);
-        println(rivals[i]);
-    }
+    //for(int i=1; i < 9; i++)
+    //{
+    //    println(operations[i]);
+    //    println(rivals[i]);
+    //}
 }
 
 
@@ -292,6 +296,7 @@ class Character {
       break;
     case 5:
       if (this.x == 330 && this.y == 180) {
+        centro = false;
         this.status = false;
       }
       break;
