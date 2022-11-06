@@ -11,7 +11,7 @@ PFont font;
 Gif malo, start, bueno;
 Character You, R1, R2, R3, R4, R5, R6, R7, R8;
 Character [] characters = new Character[9];
-
+Operation [] additions = new Operation[9];
 
 
 void setup(){
@@ -23,7 +23,7 @@ void setup(){
   start = new Gif(this, "pinicio.gif");
   malo = new Gif(this, "malo.gif");
   bueno = new Gif(this, "pbueno.gif");
-  sumas();
+
   You = new Character(0,360,rivals[0],true,bueno); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
   
   R1 = new Character(0,0,rivals[1],true,malo);
@@ -59,7 +59,6 @@ void draw(){
   {
     grid(); 
   }
-
 }
 
 
@@ -106,6 +105,9 @@ void grid(){
     if (characters[i].status==true){
       characters[i].display();
       characters[i].hide();
+      if (characters[i].status==true) {
+        additions[i].display(); 
+      }
     }
   }
   
@@ -113,25 +115,49 @@ void grid(){
   
   textFont(font,28);
   textAlign(CENTER);
-  text(operations[1], 80, 170);
-  text(operations[2], 80, 350);
   
-  text(operations[0], 80, 470);
+  // text(operations[1], 80, 170);
+  additions[2] = Operation(operations[1], 80, 170);
+  additions[2].calculate_expression();
+
+  // text(operations[2], 80, 350);
+  additions[1] = Operation(operations[2], 80, 350);
+  additions[1].calculate_expression();
   
-  text(operations[3], 400, 170);
-  text(operations[4], 400, 350);
-  text(operations[5], 400, 530);
+  // text(operations[0], 80, 470);
+  additions[0] = Operation(operations[0], 80, 470);
+  additions[0].asign(int(operations[0]));
+
+  // text(operations[3], 400, 170);
+  additions[3] = Operation(operations[3], 400, 170);
+  additions[3].calculate_expression();
+
+  // text(operations[4], 400, 350);
+  additions[4] = Operation(operations[4], 400, 350);
+  additions[4].calculate_expression();
+
+  // text(operations[5], 400, 530);
+  additions[5] = Operation(operations[5], 400, 530);
+  additions[5].calculate_expression();
   
-  text(operations[6], 720, 170);
-  text(operations[7], 720, 350);
-  text(operations[8], 720, 530);
+  // text(operations[6], 720, 170);
+  additions[6] = Operation(operations[6], 720, 170);
+  additions[6].calculate_expression();
+
+  // text(operations[7], 720, 350);
+  additions[7] = Operation(operations[7], 720, 350);
+  additions[7].calculate_expression();
+
+  // text(operations[8], 720, 530);
+  additions[8] = Operation(operations[8], 720, 530);
+  additions[8].calculate_expression();
 }
 
 void sumas(){
     rival = you;
     operations[0] = str(you);
     rivals[0] = you;
-    println("YOU: "+ you);
+    // println("YOU: "+ you);
     
     for(int i=1; i < 9; i++)
     {
@@ -147,11 +173,11 @@ void sumas(){
     
     repeated();
     
-    for(int i=1; i < 9; i++)
-    {
-        println(operations[i]);
-        println(rivals[i]);
-    }
+    // for(int i=1; i < 9; i++)
+    // {
+    //     println(operations[i]);
+    //     println(rivals[i]);
+    // }
 }
 
 
@@ -190,7 +216,7 @@ String divide(int value, int i){
         y = rand_int_num(0,1000);
     }
     rivals[i] = x+y;
-    return str(x) + " + " + str(y);
+    return str(x) + "+" + str(y);
 }
 
 String cicle1(int i){
@@ -316,7 +342,38 @@ class Character {
         this.status = false;
       }
       break;
-
     }
+  }
+}
+
+
+class Operation {
+  String expression;
+  int x;
+  int y;
+  int result;
+  boolean status = true;
+
+  Operation(String expression, int x, int y) {
+    this.expression = expression;
+    this.x = x;
+    this.y = y;
+  }
+
+  void asign(int expression) {
+    this.expression = str(expression);
+    this.result = expression;
+  }
+
+  void calculate_expression()
+  {
+    String[] parts = split(expression, '+');
+    int a = int(parts[0]);
+    int b = int(parts[1]);
+    result = a + b;
+  }
+
+  void display(){
+    text(this.expression, this.x, this.y);
   }
 }
