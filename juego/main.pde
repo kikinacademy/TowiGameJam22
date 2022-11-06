@@ -23,16 +23,20 @@ void setup(){
   malo = new Gif(this, "malo.gif");
   bueno = new Gif(this, "pbueno.gif");
   sumas();
-  You = new Character(0,360,rivals[0],true,bueno); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
+  R5 = new Character(0,360,rivals[2],true,malo); // TODO -- OJO:: HACER MÁS GRANDE Y ACOMODAR
   
-  R1 = new Character(0,0,rivals[1],true,malo);
-  R2 = new Character(650,360,rivals[2],true,malo);
-  R3 = new Character(330,0,rivals[3],true,malo);
-  R4 = new Character(650,0,rivals[4],true,malo);
-  R5 = new Character(650,180,rivals[5],true,malo);
-  R6 = new Character(330,360,rivals[6],true,malo);
-  R7 = new Character(330,180,rivals[7],true,malo);
-  R8 = new Character(0,180,rivals[8],true,malo);
+  R1 = new Character(0,0,rivals[1],true,malo); //////// Primera fila
+  R2 = new Character(330,0,rivals[3],true,malo);
+  R3 = new Character(650,0,rivals[4],true,malo);
+  
+  R4 = new Character(0,180,rivals[8],true,malo); //////// Segunda fila
+  You = new Character(330,180,rivals[0],true,bueno);
+  R6 = new Character(650,180,rivals[6],true,malo);
+  
+  
+  R7 = new Character(330,360,rivals[5],true,malo); /////// Tercera fila
+  R8 = new Character(650,360,rivals[7],true,malo);
+  
 
   characters[0] = You;
   characters[1] = R1;
@@ -104,12 +108,13 @@ void grid(){
   for (int i = 0; i < 9; i++){
     if (characters[i].status==true){
       characters[i].display();
-      characters[i].hide();
+      hide(You, R1, R2, R3, R4, R5, R6, R7, R8);
+      //characters[i].hide();
     }
   }
   
   if(center == true){
-    characters[7].display();
+    characters[5].display();
   }
   
   fill(255);
@@ -119,13 +124,13 @@ void grid(){
   text(operations[1], 80, 170);
   text(operations[2], 80, 350);
   
-  text(operations[0], 80, 470);
+  text(operations[5], 80, 530);
   
   text(operations[3], 400, 170);
-  text(operations[4], 400, 350);
-  text(operations[5], 400, 530);
+  text(characters[0].value, 400, 350);
+  text(operations[6], 400, 530);
   
-  text(operations[6], 720, 170);
+  text(operations[4], 720, 170);
   text(operations[7], 720, 350);
   text(operations[8], 720, 530);
 }
@@ -150,11 +155,11 @@ void sumas(){
     
     repeated();
     
-    //for(int i=1; i < 9; i++)
-    //{
-    //    println(operations[i]);
-    //    println(rivals[i]);
-    //}
+    for(int i=1; i < 9; i++)
+    {
+        println(operations[i]);
+        println(rivals[i]);
+    }
 }
 
 
@@ -208,33 +213,33 @@ String cicle2(int i){
 
 
 int identify_mouse_on_grid(){  
-  println("X: " + mouseX + " Y: " + mouseY);
+//  println("X: " + mouseX + " Y: " + mouseY);
   if(mouseX > 0 && mouseX < 320 && mouseY > 0 && mouseY < 180){
-    println("Top Left");
+ //   println("Top Left");
     return 1;
   } else if(mouseX > 320 && mouseX < 640 && mouseY > 0 && mouseY < 180){
-    println("Top Center");
+  //  println("Top Center");
     return 2;
   } else if(mouseX > 640 && mouseX < 960 && mouseY > 0 && mouseY < 180){
-    println("Top Right");
+  //  println("Top Right");
     return 3;
   } else if(mouseX > 0 && mouseX < 320 && mouseY > 180 && mouseY < 360){
-    println("Center Left");
+   // println("Center Left");
     return 4;
   } else if(mouseX > 320 && mouseX < 640 && mouseY > 180 && mouseY < 360){
-    println("Center");
+    //println("Center");
     return 5;
   } else if(mouseX > 640 && mouseX < 960 && mouseY > 180 && mouseY < 360){
-    println("Center Right");
+    //println("Center Right");
     return 6;
   } else if(mouseX > 0 && mouseX < 320 && mouseY > 360 && mouseY < 540){
-    println("Bottom Left");
+    //println("Bottom Left");
     return 7;
   } else if(mouseX > 320 && mouseX < 640 && mouseY > 360 && mouseY < 540){
-    println("Bottom Center");
+    //println("Bottom Center");
     return 8;
   } else if(mouseX > 640 && mouseX < 960 && mouseY > 360 && mouseY < 540){
-    println("Bottom Right");
+    //println("Bottom Right");
     return 9;
   }
   return 0;
@@ -247,6 +252,145 @@ int identify_mouse_grid_on_click(){
   }
   return 0;
 }
+
+
+void hide(Character you, Character A1,Character A2,Character A3,Character A4,Character A5,Character A6,Character A7,Character A8) {
+    int c = identify_mouse_grid_on_click();
+    switch (c) {
+    case 1: // top left (0,0)
+      if(A1.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A1.status = false;
+        int nValue = A1.value + you.value;
+        A1.value = 0;
+        //you.status = false;
+        You = new Character(0,0,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+      case 2: // top center (330, 0)
+      if(A2.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A2.status = false;
+        int nValue = A2.value + you.value;
+        A2.value = 0;
+        //you.status = false;
+        You = new Character(330,0,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+      case 3: //top right (650, 0)
+      if(A3.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A3.status = false;
+        int nValue = A3.value + you.value;
+        A3.value = 0;
+        //you.status = false;
+        You = new Character(650,0,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+      case 4: //Center left
+      if(A4.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A4.status = false;
+        int nValue = A4.value + you.value;
+        A4.value = 0;
+        //you.status = false;
+        You = new Character(0,180,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+      case 7: // Center
+        if(A5.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A5.status = false;
+        int nValue = A5.value + you.value;
+        A5.value = 0;
+        //you.status = false;
+        You = new Character(0,360,nValue,true,bueno);
+        characters[0] = You;
+        center = false;
+        return;
+      }
+      break;
+      case 6: // Center right
+      if(A6.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A6.status = false;
+        int nValue = A6.value + you.value;
+        A6.value = 0;
+        //you.status = false;
+        You = new Character(650,180,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+          case 8:
+      if(A7.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A7.status = false;
+        int nValue = A7.value + you.value;
+        A7.value = 0;
+        //you.status = false;
+        You = new Character(330,360,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+          case 9:
+      if(A8.value > you.value)
+      {
+        //Loose();
+      }
+      else
+      {
+        A8.status = false;
+        int nValue = A8.value + you.value;
+        A8.value = 0;
+        //you.status = false;
+        You = new Character(650,360,nValue,true,bueno);
+        characters[0] = You;
+        return;
+      }
+      break;
+    }
+  }
+
+
+
 
 
 class Character {
@@ -268,60 +412,5 @@ class Character {
 
   void display() {
     image(this.image, this.x, this.y, width/3, height/3);
-  }
-
-
-  void hide() {
-    int c = identify_mouse_grid_on_click();
-    switch (c) {
-    case 1:
-      if (this.x == 0 && this.y == 0) {
-        this.status = false;
-      }
-      break;
-    case 2:
-      if (this.x == 330 && this.y == 0) {
-        this.status = false;
-      }
-      break;
-    case 3:
-      if (this.x == 650 && this.y == 0) {
-        this.status = false;
-      }
-      break;
-    case 4:
-      if (this.x == 0 && this.y == 180) {
-        this.status = false;
-      }
-      break;
-    case 5:
-      if (this.x == 330 && this.y == 180) {
-        center = false;
-        this.status = false;
-      }
-      break;
-    case 6:
-      if (this.x == 650 && this.y == 180) {
-        this.status = false;
-      }
-      break;
-    case 7:
-      if (this.x == 0 && this.y == 360) {
-        
-        // this.status = false;
-      }
-      break;
-    case 8:
-      if (this.x == 330 && this.y == 360) {
-        this.status = false;
-      }
-      break;
-    case 9:
-      if (this.x == 650 && this.y == 360) {
-        this.status = false;
-      }
-      break;
-
-    }
   }
 }
