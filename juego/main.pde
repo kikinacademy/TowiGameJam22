@@ -13,6 +13,7 @@ Character You, R1, R2, R3, R4, R5, R6, R7, R8;
 Character [] characters = new Character[9];
 
 
+
 void setup(){
   size(960,540);
   font = createFont("Arial",16,true);
