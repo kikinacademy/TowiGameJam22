@@ -3,7 +3,7 @@ import gifAnimation.*;
 
 float xt = 0, yt = 0, x = 0, y = 0;
 PImage fondo, fondo2, good, stars;
-boolean flag = true, centro = true;
+boolean flag = true, center = true;
 int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
 String [] operations = new String [9];
 int [] rivals = new int[9];
@@ -99,7 +99,7 @@ void grid(){
     yt = yt + 180;
   }
   
-  // TODO -- OJO:: EL PERSONJE CENTRAL SE BORRA PQ SE QUEDA ATORADO EL MOUSE EN EL CENTRO
+  // TODO -- OJO:: EL PERSONJE CENTRAL SE BORRA PQ SE QUEDA ATORADO EL MOUSE EN EL center
 
   for (int i = 0; i < 9; i++){
     if (characters[i].status==true){
@@ -108,7 +108,7 @@ void grid(){
     }
   }
   
-  if(centro == true){
+  if(center == true){
     characters[7].display();
   }
   
@@ -296,7 +296,7 @@ class Character {
       break;
     case 5:
       if (this.x == 330 && this.y == 180) {
-        centro = false;
+        center = false;
         this.status = false;
       }
       break;
@@ -307,7 +307,8 @@ class Character {
       break;
     case 7:
       if (this.x == 0 && this.y == 360) {
-        this.status = false;
+        
+        // this.status = false;
       }
       break;
     case 8:
