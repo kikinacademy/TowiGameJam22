@@ -1,22 +1,22 @@
 import gifAnimation.*;
 
-
 float xt = 0, yt = 0, x = 0, y = 0;
 PImage fondo, fondo2, good, stars;
-boolean flag = true, center = true;
-int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5);
+boolean flag = true, center = true, loose=false;
+int you = rand_int_num(0,1000), rival, distance = rand_int_num(1,5), comidos=0;
 String [] operations = new String [9];
 int [] rivals = new int[9];
 PFont font;
 Gif malo, start, bueno;
 Character You, R1, R2, R3, R4, R5, R6, R7, R8;
 Character [] characters = new Character[9];
-
+Gif lost;
 
 void setup(){
   size(960,540);
   font = createFont("Arial",16,true);
   fondo = loadImage("inicio.png");
+  lost = new Gif(this, "lost.gif");
   good = loadImage("Cartoon-alien.png");
   stars = loadImage("stars.jpg");
   start = new Gif(this, "pinicio.gif");
@@ -87,6 +87,15 @@ void start1(){
 
 
 void grid(){
+  if(loose == true)
+  {
+    Loose(); return;
+  }
+  if(comidos==8)
+  {
+    Won();
+    return;
+  }
   stroke(255);
   strokeWeight(2);
   image(stars,0,0);
@@ -260,7 +269,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
     case 1: // top left (0,0)
       if(A1.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -276,7 +285,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
       case 2: // top center (330, 0)
       if(A2.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -292,7 +301,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
       case 3: //top right (650, 0)
       if(A3.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -308,7 +317,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
       case 4: //Center left
       if(A4.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -324,7 +333,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
       case 7: // Center
         if(A5.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -341,7 +350,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
       case 6: // Center right
       if(A6.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -357,7 +366,7 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
           case 8:
       if(A7.value > you.value)
       {
-        //Loose();
+        loose = true;
       }
       else
       {
@@ -373,7 +382,8 @@ void hide(Character you, Character A1,Character A2,Character A3,Character A4,Cha
           case 9:
       if(A8.value > you.value)
       {
-        //Loose();
+        loose=true;
+        
       }
       else
       {
@@ -413,4 +423,15 @@ class Character {
   void display() {
     image(this.image, this.x, this.y, width/3, height/3);
   }
+}
+void Loose()
+{
+  background(80);
+  lost.play();
+  image(lost,100,100,width, height);
+}
+
+void Won()
+{
+  background(0,255,0);
 }
